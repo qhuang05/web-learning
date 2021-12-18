@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    #box img,
+    .box img {
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    #controler {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 2px solid red;
+      z-index: 999;
+      display: none;
+      pointer-events: none;
+    }
+
+    #controler .pointer {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 1px solid #000;
+      pointer-events: initial;
+    }
+
+    #controler .pointer.tl {
+      left: -8px;
+      top: -8px;
+    }
+
+    #controler .pointer.tr {
+      right: -8px;
+      top: -8px;
+    }
+
+    #controler .pointer.bl {
+      left: -8px;
+      bottom: -8px;
+    }
+
+    #controler .pointer.br {
+      right: -8px;
+      bottom: -8px;
+    }
+
+    #controler .rotate {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: red;
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      margin-top: -8px;
+      pointer-events: initial;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="controler">
+    <a class="pointer tl"></a>
+    <a class="pointer tr"></a>
+    <a class="pointer bl"></a>
+    <a class="pointer br"></a>
+    <a class="rotate"></a>
+  </div>
+  <div class="box" style="position:absolute;width:400px;height:300px;left:300px;top:300px;transform:rotate(0deg);background: #000;" rotate="0"></div>
+  <div id="box" style="position:absolute;width:400px;height:300px;left:300px;top:300px;transform:rotate(48deg);opacity: 0.9" rotate="48">
+    <img src="./images/640-960.jpg">
+  </div>
+
+  <script>
+    window.onload = function () {
+      var $box = document.querySelector('#box');
+      var $controler = document.getElementById('controler');
+      var $pointer = document.querySelectorAll('#controler .pointer');
+
+      // 平移
+      $box.addEventListener('mousedown', function (e) {
+        let objRect = this.getBoundingClientRect();
+        $controler.style.width = parseFloat($box.clientWidth) + 'px';
+        $controler.style.height = parseFloat($box.clientHeight) + 'px';
+        $controler.style.left = parseFloat($box.style.left) + 'px';
+        $controler.style.top = parseFloat($box.style.top) + 'px';
+        $controler.style.transform = $box.style.transform;
+        let startPos = { x: e.clientX, y: e.clientY, left: parseFloat($box.style.left), top: parseFloat($box.style.top) };
+        $controler.style.display = 'block';
+        this.moveFun = function (e) {
+          let changeX = e.clientX - startPos.x, changeY = e.clientY - startPos.y;
+          $box.style.left = startPos.left + changeX + 'px';
+          $box.style.top = startPos.top + changeY + 'px';
+          $controler.style.left = startPos.left + changeX + 'px';
+          $controler.style.top = startPos.top + changeY + 'px';
+        }
+        document.addEventListener('mousemove', this.moveFun, false);
+      })
+      document.addEventListener('mouseup', function (e) {
+        document.removeEventListener('mousemove', $box.moveFun);
+      }, false);
+
+      // 旋转
+      var $rotate = document.querySelector('#controler .rotate');
+      $rotate.addEventListener('mousedown', function (e) {
+        let initAngle = parseInt($box.getAttribute('rotate'));
+        // 旋转中心点cx,cy
+        let ctlRect = $controler.getBoundingClientRect();
+        let cx = ctlRect.x + ctlRect.width / 2, cy = ctlRect.y + ctlRect.height / 2;
+        let startPos = { x: e.clientX, y: e.clientY };
+        let angle;
+        $controler.rotateFun = function (e) {
+          let endPos = { x: e.clientX, y: e.clientY };
+          // 向量判断旋转方向为顺时针或逆时针, C为中心点,A为起始点,B为终点
+          let CA = { x: startPos.x - cx, y: startPos.y - cy }, CB = { x: endPos.x - cx, y: endPos.y - cy };
+          //direct为负表示逆时针，正表示顺时针
+          let direct = CA.x * CB.y - CA.y * CB.x; 
+          // 余弦定理求旋转角
+          let lengthCA = Math.sqrt(Math.pow(CA.x, 2) + Math.pow(CA.y, 2));
+          let lengthCB = Math.sqrt(Math.pow(CB.x, 2) + Math.pow(CB.y, 2));
+          let lengthAB = Math.sqrt(Math.pow(endPos.x - startPos.x, 2) + Math.pow(endPos.y - startPos.y, 2));
+          let cosA = (Math.pow(lengthCA, 2) + Math.pow(lengthCB, 2) - Math.pow(lengthAB, 2)) / (2 * lengthCA * lengthCB);
+          let changeAngle = Math.round(Math.acos(cosA) * 180 / Math.PI);
+          if (direct < 0) {
+            angle = initAngle - changeAngle;
+          } else {
+            angle = initAngle + changeAngle;
+          }
+          $controler.style.transform = `rotate(${angle}deg)`;
+          $box.style.transform = `rotate(${angle}deg)`;
+          $box.setAttribute('rotate', angle);
+        }
+        document.addEventListener('mousemove', $controler.rotateFun, false);
+      });
+      document.addEventListener('mouseup', function (e) {
+        document.removeEventListener('mousemove', $controler.rotateFun)
+      }, false);
+      
+      // 缩放
+      $controler.addEventListener('mousedown', function (e) {
+        let direction = '';
+        if (e.target.className.indexOf('tl') > -1) {
+          direction = 'tl';
+        } else if (e.target.className.indexOf('tr') > -1) {
+          direction = 'tr';
+        } else if (e.target.className.indexOf('bl') > -1) {
+          direction = 'bl';
+        } else if (e.target.className.indexOf('br') > -1) {
+          direction = 'br';
+        }
+        console.log('direction => ', direction);
+        if (direction) {
+          let rotate = parseInt($box.getAttribute('rotate'));
+          let nodePoint = getNodePoint($box, rotate);
+          let nodeRect = $box.getBoundingClientRect();
+          let startPos = {x: e.clientX, y: e.clientY, width: $box.clientWidth, height: $box.clientHeight, left: parseFloat($box.style.left), top: parseFloat($box.style.top)}
+          let angle = Math.atan(startPos.height / startPos.width) * 180 / Math.PI;
+          let _rotate = Math.abs(rotate%90)+angle;
+          console.log('nodePoint => ', nodePoint)
+          this.scaleFun = function (e) {
+            let endPos = { x: e.clientX, y: e.clientY };
+            let changeX = endPos.x - startPos.x, changeY = endPos.y - startPos.y;
+            let changeR = Math.sqrt(Math.pow(Math.abs(changeX), 2) + Math.pow(Math.abs(changeY), 2));
+            let changeW = Math.cos(angle * Math.PI / 180) * changeR;
+            let changeH = Math.sin(angle * Math.PI / 180) * changeR;
+            let nodePoint2 = {};
+            switch (direction) {
+              case 'tl':
+                if (changeX < 0 && changeY < 0) { // 放大
+                  nodePoint2.width = startPos.width + changeW;
+                  nodePoint2.height = startPos.height + changeH;
+                  endPos.left = startPos.left - changeH;
+                  endPos.top = startPos.top - changeW;
+                } else if (changeX > 0 && changeY > 0) { // 缩小
+                  nodePoint2.width = startPos.width - changeW;
+                  nodePoint2.height = startPos.height - changeH;
+                  endPos.left = startPos.left + changeH;
+                  endPos.top = startPos.top + changeW;
+                }
+                nodePoint2.R = Math.sqrt(Math.pow(nodePoint2.width, 2) + Math.pow(nodePoint2.height, 2));
+                nodePoint2.cx = nodePoint2.x3 - (nodePoint2.R - nodePoint.R) * Math.cos(_rotate*Math.PI/180);
+                nodePoint2.cy = nodePoint2.y3 - (nodePoint2.R - nodePoint.R) * Math.sin(_rotate*Math.PI/180);
+              case 'tr':
+                break;
+              case 'bl':
+                break;
+              case 'br':
+                break;
+            }
+            $box.style.width = nodePoint2.width + 'px';
+            $box.style.height = nodePoint2.height + 'px';
+            $box.style.left = endPos.left + (changeR * Math.cos(_rotate * Math.PI/180)) + 'px';
+            $box.style.top = endPos.top + 'px';
+            // $controler.style.width = nodePoint2.width + 'px';
+            // $controler.style.height = nodePoint2.height + 'px';
+            // $controler.style.left = endPos.left + 'px';
+            // $controler.style.top = endPos.top + 'px';
+          }
+          document.addEventListener('mousemove', this.scaleFun, false);
+        }
+      })
+      document.addEventListener('mouseup', function (e) {
+        document.removeEventListener('mousemove', $controler.scaleFun);
+      }, false);
+    }
+  </script>
+  <script>
+    // 求元素四个角的坐标, rotate范围[-180, 180]
+    function getNodePoint(node, rotate) {
+      let nodeRect = node.getBoundingClientRect();
+      let cx = nodeRect.x + nodeRect.width / 2;
+      let cy = nodeRect.y + nodeRect.height / 2;
+      let R = Math.sqrt(Math.pow(node.clientWidth, 2) + Math.pow(node.clientHeight, 2));
+      let x1, y1, x2, y2, x3, y3, x4, y4;
+      let rotate1 = rotate % 360;
+      if(rotate1 > 180){
+        rotate1 = rotate1 - 360;
+      } else if(rotate1 < -180){
+        rotate1 = rotate1 + 180;
+      }
+      let rotate2 = Math.abs(rotate % 90) * Math.PI / 180;
+      if(rotate1 >= 0 && rotate1 < 90){
+        x1 = nodeRect.x + Math.sin(rotate2) * node.clientHeight;
+        y4 = nodeRect.y + Math.cos(rotate2) * node.clientHeight;
+        y2 = nodeRect.y + Math.sin(rotate2) * node.clientWidth;
+        x3 = nodeRect.x + Math.cos(rotate2) * node.clientWidth;
+      } else if(rotate1 >= 90){
+        x1 = nodeRect.x + Math.sin(rotate2) * node.clientWidth;
+        y4 = nodeRect.y + Math.cos(rotate2) * node.clientWidth;
+        y2 = nodeRect.y + Math.sin(rotate2) * node.clientHeight;
+        x3 = nodeRect.x + Math.cos(rotate2) * node.clientHeight;
+      } else if(rotate1 < 0 && rotate1 >-90 ){
+        x1 = nodeRect.x + Math.cos(rotate2) * node.clientWidth;
+        y4 = nodeRect.y + Math.sin(rotate2) * node.clientWidth;
+        y2 = nodeRect.y + Math.cos(rotate2) * node.clientHeight;
+        x3 = nodeRect.x + Math.sin(rotate2) * node.clientHeight;
+      } else {
+        x1 = nodeRect.x + Math.cos(rotate2) * node.clientHeight;
+        y4 = nodeRect.y + Math.sin(rotate2) * node.clientHeight;
+        y2 = nodeRect.y + Math.cos(rotate2) * node.clientWidth;
+        x3 = nodeRect.x + Math.sin(rotate2) * node.clientWidth;
+      }
+      y1 = nodeRect.y;
+      x2 = nodeRect.x + nodeRect.width;
+      y3 = nodeRect.y + nodeRect.height;
+      x4 = nodeRect.x;
+      return {cx, cy, R, x1, y1, x2, y2, x3, y3, x4, y4};
+    }
+  </script>
+</body>
+
+</html>
