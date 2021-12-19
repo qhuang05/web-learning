@@ -75,7 +75,7 @@ console.log(myGenericString.add('abc', 'ABC'))
 interface Lengthwise{
   length: number
 }
-function fn<T extends Lengthwise>(x: T): void{
+function fnn<T extends Lengthwise>(x: T): void{
   console.log(x.length)
 }
-fn('abc')
+fnn('abc')

@@ -54,7 +54,7 @@ let myGenericNumber = new GenericNumber(0);
 console.log(myGenericNumber.add(0, 10));
 let myGenericString = new GenericNumber('abc');
 console.log(myGenericString.add('abc', 'ABC'));
-function fn(x) {
+function fnn(x) {
     console.log(x.length);
 }
-fn('abc');
+fnn('abc');
