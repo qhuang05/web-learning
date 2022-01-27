@@ -7,11 +7,23 @@
   <title>Typescript Learning</title>
 </head>
 <body>
-  <script src="js/01-基础类型.js"></script>
+  <!-- <script src="js/01-基础类型.js"></script>
   <script src="js/02-接口.js"></script>
   <script src="js/03-类.js"></script>
   <script src="js/04-抽象类abstract.js"></script>
   <script src="js/05-函数.js"></script>
-  <script src="js/06-泛型.js"></script>
+  <script src="js/06-泛型.js"></script> -->
 </body>
+<script>
+  // a?.b === a&&a.b ? a.b : undefined
+  let data = [1,2,3]
+  let data2 = {x: 10, y:20}
+  let flag = data?.findIndex(a=>a==2);
+  let flag2 = data2?.y;
+  
+  // a.b??[] === a.b ? a.b : []
+  let flag3 = data2.y ?? [];
+  let flag4 = data2.z ?? 'z';
+  console.log('>>flag==', flag, flag2, flag3, flag4)
+</script>
 </html>
