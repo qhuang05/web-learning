@@ -79,3 +79,8 @@ function fnn<T extends Lengthwise>(x: T): void{
   console.log(x.length)
 }
 fnn('abc')
+
+type DataType<T> = {
+  id: number,
+  data: Array<T>
+}
