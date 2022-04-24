@@ -13,6 +13,7 @@
   <div id="box"></div>
   <script>
     $(function () {
+      // getBBox取的是旋转后外面最大矩形的值，相当于konva中的getClientRect
       var svg = Snap(400, 400);
       svg.attr({
         id: 'svg',
@@ -25,8 +26,8 @@
       console.log('box1 >> ', box1)
 
       var matrix = new Snap.Matrix(1,0,0,1,0,0);
-      matrix.translate(50, 50);
       matrix.scale(0.8,0.8);
+      matrix.translate(50, 50);
       matrix.rotate(30);
       img.transform(matrix);
       var box2 = img.getBBox();
