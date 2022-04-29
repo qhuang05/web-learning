@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://unpkg.com/konva@4.0.18/konva.min.js"></script>
+  <script src="../js/transform.js"></script>
+  <meta charset="utf-8" />
+  <title>Konva Path Demo</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      /* background-color: #f0f0f0; */
+    }
+    #container{
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container" style="border:1px solid red"></div>
+  <script>
+    window.onload = function () {
+      var stageWidth = 600, stageHeight = 600;
+      var stage = new Konva.Stage({
+        container: 'container',
+        width: stageWidth,
+        height: stageHeight,
+        x: 0,
+        y: 0,
+      });
+      var layer = new Konva.Layer({
+        name: 'layer',
+      })
+      stage.add(layer);
+
+      let rect = new Konva.Rect({
+        x: 200,
+        y: 200,
+        width: 200,
+        height: 200,
+        offsetX: 100,
+        offsetY: 100,
+        rotation: -45,
+        fill: 'red'
+      })
+      let rect2 = new Konva.Rect({
+        x: 150,
+        y: 150,
+        width: 200,
+        height: 100,
+        offsetX: 100,
+        offsetY: 50,
+        rotation: 30,
+        fill: 'green'
+      })
+      layer.add(rect)
+      layer.add(rect2)
+
+      let group = new Konva.Group({
+        draggable: true,
+        // width: 200,
+        // height: 200,
+        // offsetX: 100,
+        // offsetY: 100,
+        // x: 100,
+        // y: 100
+      });
+      layer.add(group)
+      layer.add(group);
+
+      rect.moveTo(group);
+      rect2.moveTo(group)
+      layer.batchDraw();
+
+      const tr = new Konva.Transformer();
+      tr.attachTo(group)
+      layer.add(tr)
+
+      group.on('dragend', e => {
+        change()
+      })
+      group.on('transformend', e => {
+        change()
+      })
+
+      const change = function(){
+        let rectClone = rect.clone();
+        let nodeAttrs = rectClone.getAttrs();
+        let groupAttrs = group.getAttrs();
+        const gTransform = group.getTransform();
+        const nodeTransform = rect.getTransform();
+        const endTransform = gTransform.multiply(nodeTransform);
+
+        let scaleX = (nodeAttrs.scaleX || 1) * (groupAttrs.scaleX || 1);
+        let scaleY = (nodeAttrs.scaleY || 1) * (groupAttrs.scaleY || 1);
+        let rotation = rotateConvert(nodeAttrs.rotation + (groupAttrs.rotation || 0));
+        let width = rectClone.width() * scaleX;
+        let height = rectClone.height() * scaleY;
+        let cPoint = getCenterPoint({x: endTransform.m[4], y: endTransform.m[5]}, width, height, rotation);
+        rectClone.setAttrs({
+          fill: 'blue',
+          x: cPoint.x,
+          y: cPoint.y,
+          scaleX,
+          scaleY,
+          rotation
+        })
+        layer.add(rectClone);
+        setTimeout(() => {
+          rectClone.destroy();
+          layer.batchDraw()
+        }, 500)
+        layer.batchDraw()
+      }
+    }
+
+    // 计算点nodePoint绕中心点centerPoint旋转某个角度后的坐标
+    const getPointAfterRotate = ({nodePoint, centerPoint, rotate=0}) => {
+      let nodeRotate = rotate * Math.PI / 180
+      return {
+        x: (nodePoint.x - centerPoint.x) * Math.cos(nodeRotate) - (nodePoint.y - centerPoint.y) * Math.sin(nodeRotate) + centerPoint.x,
+        y: (nodePoint.x - centerPoint.x) * Math.sin(nodeRotate) + (nodePoint.y - centerPoint.y) * Math.cos(nodeRotate) + centerPoint.y
+      }
+    }
+    // 旋转角度转换, 角度转化为[-180, 180]
+    const rotateConvert = (rotate) => {
+      if(rotate > 180) {
+        return rotate - 360
+      } else if(rotate < -180) {
+        return rotate + 180
+      }
+      return rotate;
+    }
+
+    // 已知左上角坐标求中心点
+    const getCenterPoint = (point, width, height, rotate) => {
+      const r = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2)) / 2;
+      const oringAngle = Math.atan(height / width);
+      const tansAngle = rotate * Math.PI / 180 + oringAngle
+      return {
+        x: parseFloat(point.x) + r * Math.cos(tansAngle),
+        y: parseFloat(point.y) + r * Math.sin(tansAngle),
+      };
+    }
+  </script>
+</body>
+
+</html>
