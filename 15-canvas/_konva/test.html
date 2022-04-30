@@ -88,6 +88,7 @@
       })
 
       const change = function(){
+        // return
         let rectClone = rect.clone();
         let nodeAttrs = rectClone.getAttrs();
         let groupAttrs = group.getAttrs();
@@ -98,8 +99,8 @@
         let scaleX = (nodeAttrs.scaleX || 1) * (groupAttrs.scaleX || 1);
         let scaleY = (nodeAttrs.scaleY || 1) * (groupAttrs.scaleY || 1);
         let rotation = rotateConvert(nodeAttrs.rotation + (groupAttrs.rotation || 0));
-        let width = rectClone.width() * scaleX;
-        let height = rectClone.height() * scaleY;
+        let width = rect.width() * scaleX;
+        let height = rect.height() * scaleY;
         let cPoint = getCenterPoint({x: endTransform.m[4], y: endTransform.m[5]}, width, height, rotation);
         rectClone.setAttrs({
           fill: 'blue',
