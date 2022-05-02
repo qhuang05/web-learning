@@ -4,20 +4,14 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>canvas绘制圆角矩形</title>
+  <title>canvas绘制圆形图片</title>
 </head>
 <body>
-  <canvas id="canvas" width="400" height="400" style="background-color: #efefef;"></canvas>
+  <canvas id="canvas" width="400" height="400" style="border: 2px solid #000"></canvas>
   <script>
-    const roundRect = ({ctx, w, h, x, y, r}) => {
-      if(w < 2*r) r = w/2;
-      if(h < 2*r) r = h/2;
+    const round = ({ctx, cx, cy, r}) => {
       ctx.beginPath();
-      ctx.moveTo(x+r, y);
-      ctx.arcTo(x+w, y, x+w, y+h, r);
-      ctx.arcTo(x+w, y+h, x, y+h, r);
-      ctx.arcTo(x, y+h, x, y, r);
-      ctx.arcTo(x, y, x+w, y, r);
+      ctx.arc(cx, cy, r, 0, 2*Math.PI);
       ctx.closePath();
     }
     const drawImage = (ctx, url) => {
@@ -25,7 +19,7 @@
       image.src = url;
       image.setAttribute('crossOrigin', 'anonymous');
       image.onload = () =>{
-        ctx.drawImage(image, 0, 0, 250, 200);
+        ctx.drawImage(image, 0, 0, 200, 200);
       }
     }
     window.onload = function () {
@@ -35,7 +29,7 @@
       ctx.save();
       ctx.lineWidth = 2;
       ctx.strokeStyle = '#f00';
-      roundRect({ctx, w:250, h:200, x: 50, y: 50, r: 50})
+      round({ctx, cx: 150, cy: 150, r: 100})
       ctx.stroke();
       ctx.restore();
       ctx.clip();

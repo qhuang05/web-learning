@@ -267,10 +267,7 @@
         let oringAngle = Math.atan(height / width); //两个图片中心点的初始角度
         let tansAngle = (config.rotation * Math.PI) / 180 + oringAngle; //旋转后两个图片中心点的角度
         //兼容火狐
-        let svgM = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg"
-        );
+        let svgM = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         let matrix = svgM.createSVGMatrix();
         let containerRect = $container.getBoundingClientRect();
         let imgRect = $optImg.getBoundingClientRect();

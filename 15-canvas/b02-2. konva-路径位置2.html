@@ -16,8 +16,8 @@
 </head>
 
 <body>
-  <img src="../images/path1.svg" width="60" />
-  <img src="../images/path2.svg" width="60" />
+  <img src="./images/path1.svg" width="60" />
+  <img src="./images/path2.svg" width="60" />
   <button id="addPath">添加路径</button>
   <div id="container" style="border:1px solid red;width:600px;height:600px;"></div>
   <script>
@@ -35,7 +35,7 @@
       stage.add(layer);
 
       var _image = new Image();
-      _image.src = '../images/sm001.jpg';
+      _image.src = './images/sm001.jpg';
       var image, imgTr;
       _image.onload = function () {
         image = new Konva.Image({
@@ -65,7 +65,7 @@
           draggable: true,
         });
         var pathImg = new Image();
-        pathImg.src = '../images/path1.svg';
+        pathImg.src = './images/path1.svg';
         pathImg.onload = function () {
           var imageWidth = image.width() * image.scaleX();
           var imageHeight = image.height() * image.scaleY();
