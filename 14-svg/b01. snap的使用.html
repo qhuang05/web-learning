@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>snap.svg使用</title>
-  <script src="../js/jquery-1.11.3.min.js"></script>
-  <script src="../js/snap.svg-min.js"></script>
+  <script src="./js/jquery-1.11.3.min.js"></script>
+  <script src="./js/snap.svg-min.js"></script>
   <style>
     #box {
       width: 600px;
@@ -22,7 +22,7 @@
   <button onclick="cloneSvg()">复制svg</button>
   <div id="box"></div>
   <script>
-    $(function () {
+    window.onload = function () {
       // 创建一个svg
       var svg = Snap(400, 400);
       svg.attr({
@@ -49,17 +49,17 @@
       g.drag();
 
       // 绘制图片
-      var img1 = svg.paper.image('../images/main.png', 0, 0, 500, 500);
+      var img1 = svg.paper.image('./images/main.png', 0, 0, 500, 500);
 
       // 绘制文本
       var txt1 = svg.paper.text(0, 120, '文字测试');
 
-      $('#box').append(svg.node);
+      document.querySelector('#box').appendChild(svg.node)
 
       // 获取svg元素, select/selectAll获取set集合
       var s = Snap('#svg');
       let c = s.selectAll('circle');
-    });
+    }
     function changeSvgSize() {
       let s = Snap('#svg');
       s.attr({ width: 200, height: 200 });
