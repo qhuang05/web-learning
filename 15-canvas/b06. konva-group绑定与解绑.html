@@ -32,6 +32,11 @@
       })
       stage.add(layer);
 
+      var designGroup = new Konva.Group({
+        name: 'designGroup'
+      })
+      layer.add(designGroup)
+
       let rect = new Konva.Rect({
         x: 200,
         y: 200,
@@ -52,8 +57,8 @@
         rotation: 30,
         fill: 'green'
       })
-      layer.add(rect)
-      layer.add(rect2)
+      designGroup.add(rect)
+      designGroup.add(rect2)
 
       let group = new Konva.Group({
         draggable: true,
@@ -61,11 +66,10 @@
         // height: 200,
         // offsetX: 100,
         // offsetY: 100,
-        // x: 100,
-        // y: 100
+        x: 100,
+        y: 100
       });
-      layer.add(group)
-      layer.add(group);
+      designGroup.add(group)
 
       rect.moveTo(group);
       rect2.moveTo(group)
@@ -105,7 +109,7 @@
           scaleY,
           rotation
         })
-        layer.add(rectClone);
+        designGroup.add(rectClone);
         setTimeout(() => {
           rectClone.destroy();
           layer.batchDraw()
