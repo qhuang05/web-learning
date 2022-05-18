@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <button id="btn">click me</button>
     <div style="height:3000px;background:sandybrown"></div>
     <script>
         // https://zhuanlan.zhihu.com/p/157711895?from_voters_page=true
@@ -36,6 +37,64 @@
                 }, wait)
             }
         }
+
+        const throttle3 = (fn, wait = 500, isImmediate = false) => {
+            // 计时器
+            let timerId = null;
+
+            // flag为真时立即执行
+            let flag = true;
+            let resultFunc = null;
+
+
+            if (isImmediate) {
+                // 立即执行
+                //  例如：用户在输入框中输入字符,输入第一个字符时，立即执行一次
+                // 之后，最终间隔超过2秒后，才执行补全查询
+
+                resultFunc = function () {
+                    let context = this;
+
+                    clearTimeout(timerId);
+                    if (flag) {
+                        fn.apply(context, arguments);
+                        flag = false
+                    }
+                    timerId = setTimeout(() => {
+                        flag = true
+                    }, wait)
+                }
+
+                resultFunc.cancel = function () {
+                    // 例如，用户打字很快，然后输入完成后，未达到两秒钟就移动鼠标
+                    // 此时输入框失去焦点，触发取消等待方法，立刻执行补全查询操作并显示结果出来
+
+                    console.log("立即取消等待")
+                    clearTimeout(timerId);
+                    flag = true;
+                }
+
+            } else {
+                // 不立即执行 
+                //  例如：用户在输入框中输入字符，最终间隔超过2秒后，才执行补全查询
+
+                resultFunc = function () {
+                    let context = this;
+
+                    clearTimeout(timerId);
+                    timerId = setTimeout(() => {
+                        fn.apply(context, arguments)
+                    }, wait)
+                }
+
+                resultFunc.cancel = function () {
+                    console.log("立即取消等待");
+                    clearTimeout(timerId);
+                }
+            }
+            return resultFunc;
+        }
+
         // document.onscroll = throttle(function(){
         //     console.log('scrolling throttle...');
         // })
@@ -57,7 +116,7 @@
             }
         }
         // 防抖立即执行
-        const debounce2 = (func, wait = 2000, immediate = true) => {
+        const debounce2 = (func, wait = 1000, immediate = true) => {
             let timer = null;
             return (...args) => {
                 if (timer) {
@@ -80,9 +139,13 @@
         // document.onscroll = debounce(function () {
         //     console.log('scrolling debounce...');
         // })
-        document.onscroll = debounce2(function () {
+        document.onscroll = debounce(function () {
             console.log('scrolling debounce2...');
         })
+        document.getElementById('btn').onclick = debounce2(test);
+        function test() {
+            console.log('clicked')
+        }
     </script>
 </body>
 
