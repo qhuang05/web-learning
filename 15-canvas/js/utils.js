@@ -56,6 +56,25 @@ const getTLPoint = (point, width, height, rotate = 0) => {
   });
 };
 
+const getGroupRectSize = (nodes, relativeTo) => {
+  let xArr = [], yArr = [];
+  [].forEach.call(nodes, node => {
+    const nodeRect = node.getClientRect({ relativeTo });
+    xArr.push(nodeRect.x, nodeRect.x + nodeRect.width);
+    yArr.push(nodeRect.y, nodeRect.y + nodeRect.height);
+  });
+  const minX = Math.min(...xArr);
+  const maxX = Math.max(...xArr);
+  const minY = Math.min(...yArr);
+  const maxY = Math.max(...yArr);
+  return {
+    x: minX,
+    y: minY,
+    width: maxX - minX,
+    height: maxY - minY
+  }
+}
+
 // 矩阵相乘(不需要用，直接使用现成的transform.js提供的方法即可)
 const matrixMuliply = (a, b) => {
   var c = new Array(a.length);
