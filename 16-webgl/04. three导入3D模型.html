@@ -19,26 +19,27 @@
 </head>
 
 <body>
+  <div id="container"></div>
   <script src="build/three.js"></script>
-  <script src="plugins/OBJLoader.js"></script>
+  <script src="loaders/glTFLoader.js"></script>
   <script>
-    var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(-45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(800, 500);
+    // import * as THREE from './build/three.module.js';
+    // import { GLTFLoader } from './loaders/glTFLoader.js'
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(-45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
     document.body.appendChild(renderer.domElement);
 
     // 导入3D模型
-    var loader = new THREE.GLTFLoader();
-    loader.load('./models/coffee_mug_school_project/cupModel.obj', function (obj) {
-      scene.add(obj.scene);
-    }, undefined, function (error) {
-
+    const gltfLoader = new THREE.glTFLoader();
+    gltfLoader.load('./models/Horse.gltf', (gltf) => {
+      scene.add(gltf.scene);
     });
 
     camera.position.set(0, 0, 100);
     camera.lookAt(0, 0, 0);
 
+    renderer.setSize(600, 600);
     renderer.render(scene, camera);
   </script>
 </body>

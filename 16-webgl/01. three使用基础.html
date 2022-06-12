@@ -27,7 +27,8 @@
 <body>
   <div id="container"></div>
   <script src="build/three.js"></script>
-  <script>
+  <script _type="module">
+    // import * as THREE from './build/three.module.js';
     // 1. 创建场景、相机、渲染器
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
@@ -36,7 +37,7 @@
 
     // 2. 创建物体(可以理解：物体由几何形状+材质组合而成)
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    // const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); //MeshBasicMaterial材质不会受到灯光的影响
+    // const material = new THREE.MeshBasicMaterial({color: 0x00ff00 }); //MeshBasicMaterial材质不会受到灯光的影响
     const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
     const obj = new THREE.Mesh(geometry, material);
 
