@@ -31,21 +31,25 @@
     // import * as THREE from './build/three.module.js';
     // 1. 创建场景、相机、渲染器
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
     const renderer = new THREE.WebGLRenderer();
     document.querySelector('#container').appendChild(renderer.domElement);
 
     // 2. 创建物体(可以理解：物体由几何形状+材质组合而成)
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    // const material = new THREE.MeshBasicMaterial({color: 0x00ff00 }); //MeshBasicMaterial材质不会受到灯光的影响
-    const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); //MeshBasicMaterial材质不会受到灯光的影响
+    // const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
     const obj = new THREE.Mesh(geometry, material);
+    obj.position.set(-1, -1, -1);
+    obj.scale.set(2, 2, 2);
+    obj.rotation.x = 45 / 180 * Math.PI;
+    obj.rotation.y = 45 / 180 * Math.PI;
 
     // 3. 将物体添加到场景中
     scene.add(obj);
 
     // 4. 调整相机的位置
-    camera.position.set(5, 5, 5);
+    camera.position.set(0, 0, 5);
     camera.lookAt(0, 0, 0)
 
     // 5. 添加灯光
