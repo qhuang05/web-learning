@@ -61,13 +61,13 @@
     render();
 
     // 7. 动画
-    const animate = function () {
+    const tick = function () {
       obj.rotation.x += 0.01;
       obj.rotation.y += 0.01;
       render();
-      requestAnimationFrame(animate);
+      requestAnimationFrame(tick);
     }
-    animate();
+    tick();
 
     // import MCreator from './js/modelCreator.js'
     // let mc = new MCreator();
