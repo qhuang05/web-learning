@@ -18,8 +18,11 @@ renderer.setClearColor("#000");
 document.querySelector("#app").appendChild(renderer.domElement);
 
 // 添加物体
-const g = new THREE.BoxGeometry(1, 1, 1);
-const m = new THREE.MeshBasicMaterial({ color: 0xff00ff });
+const g = new THREE.SphereGeometry(0.7);
+const m = new THREE.MeshBasicMaterial({
+  color: 0xff00ff,
+  wireframe: true,
+});
 const cube = new THREE.Mesh(g, m);
 scene.add(cube);
 
