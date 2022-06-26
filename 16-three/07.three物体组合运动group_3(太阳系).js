@@ -18,7 +18,8 @@ document.querySelector("#app").appendChild(renderer.domElement);
 const group = new THREE.Group();
 const group2 = new THREE.Group();
 
-const g1 = new THREE.BoxGeometry(1, 1, 1);
+const g1 = new THREE.BoxGeometry(0.8, 0.8, 0.8);
+// const g1 = new THREE.SphereGeometry(0.8);
 const m1 = new THREE.MeshBasicMaterial({ color: 0xff0000 });
 const cube1 = new THREE.Mesh(g1, m1);
 
@@ -26,15 +27,17 @@ group.add(cube1);
 group.add(group2);
 
 const g2 = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+// const g2 = new THREE.SphereGeometry(0.5);
 const m2 = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 const cube2 = new THREE.Mesh(g2, m2);
 group2.add(cube2);
 
 const g3 = new THREE.BoxGeometry(0.3, 0.3, 0.3);
+// const g3 = new THREE.SphereGeometry(0.3);
 const m3 = new THREE.MeshBasicMaterial({ color: 0x0000ff });
 const cube3 = new THREE.Mesh(g3, m3);
 group2.add(cube3);
-cube3.position.y = 0.5;
+cube3.position.y = 0.7;
 
 group2.position.y = 1.5;
 
