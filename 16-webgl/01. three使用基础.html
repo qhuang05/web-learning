@@ -69,6 +69,23 @@
     }
     tick();
 
+
+    /* 动画：解决不同刷新率的问题
+    60hz: 60 * 0.01 = 0.6
+    120hz: 120 * 0.01 = 1.2 */
+    // let time = Date.now();
+    // const tick = function () {
+    //   let curTime = Date.now();
+    //   let deltaTime = curTime - time;
+    //   time = curTime;
+    //   obj.rotation.x += deltaTime * 0.001;
+    //   obj.rotation.y += deltaTime * 0.001;
+    //   render();
+    //   requestAnimationFrame(tick);
+    // }
+    // tick();
+    
+
     // import MCreator from './js/modelCreator.js'
     // let mc = new MCreator();
     // mc.init();
