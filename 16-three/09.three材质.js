@@ -24,12 +24,14 @@ document.querySelector("#app").appendChild(renderer.domElement);
 
 // 添加物体
 const g = new THREE.SphereGeometry(0.7);
-// 材质:
-// MeshBasicMaterial, MeshNormalMaterial: 不需要灯光
-// MeshLambertMaterial: 需要灯光
-// MeshPhongMaterial: 需要灯光, 在MeshLambertMaterialf基础上添加了高光效果
-// MeshStandardMaterial: 需要灯光, 通过调整属性可以达到MeshLambertMaterial和MeshPhongMateriald的效果
-// 其它更高级的材质: 详见api
+/* 
+材质:
+MeshBasicMaterial, MeshNormalMaterial: 不需要灯光
+MeshLambertMaterial: 需要灯光
+MeshPhongMaterial: 需要灯光, 在MeshLambertMaterialf基础上添加了高光效果
+MeshStandardMaterial: 需要灯光, 通过调整属性可以达到MeshLambertMaterial和MeshPhongMateriald的效果
+其它更高级的材质: 详见api 
+*/
 const m = new THREE.MeshPhongMaterial();
 m.color = new THREE.Color(0xff0000);
 // m.wireframe = true;
