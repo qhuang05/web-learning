@@ -19,6 +19,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, w / h, 1, 1000);
 camera.position.set(5, 5, 5);
 camera.lookAt(0, 0, 0);
+camera.zoom = 1.5;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(w, h);
@@ -66,10 +67,13 @@ const controler = new OrbitControls(camera, renderer.domElement);
 const clock = new THREE.Clock();
 const tick = function () {
   const time = clock.getElapsedTime();
-  obj.position.y = Math.abs(Math.sin(time * 2)) + 0.5;
+  // obj.position.y = Math.abs(Math.sin(time * 2)) + 0.5;
+  obj.position.x = Math.sin(time * 2);
+  obj.position.y = Math.abs(Math.cos(time * 2)) + 0.5;
   renderer.render(scene, camera);
+  requestAnimationFrame(tick);
   controler.update();
   lightHelper.update();
-  requestAnimationFrame(tick);
+  camera.updateProjectionMatrix(); //改变camer的zoom属性, 要updateProjectionMatrix才能生效
 };
 tick();
