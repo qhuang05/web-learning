@@ -11,8 +11,8 @@ import {
 // plan.receiveShadow = true;
 // obj.castShadow = true;
 
-const w = 600 || window.innerWidth,
-  h = 600 || window.innerHeight;
+let w = window.innerWidth,
+  h = window.innerHeight;
 
 const scene = new THREE.Scene();
 
@@ -67,6 +67,8 @@ const controler = new OrbitControls(camera, renderer.domElement);
 // const camerHelper = new THREE.CameraHelper(camera);
 // scene.add(camerHelper);
 
+renderer.render(scene, camera);
+
 const clock = new THREE.Clock();
 const tick = function () {
   const time = clock.getElapsedTime();
@@ -80,3 +82,21 @@ const tick = function () {
   camera.updateProjectionMatrix(); //改变camer的zoom属性, 要updateProjectionMatrix才能生效
 };
 tick();
+
+// 窗口resize
+window.addEventListener("resize", () => {
+  w = window.innerWidth;
+  h = window.innerHeight;
+
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(w, h);
+});
+
+// window.addEventListener("mousemove", (e) => {
+//   const mouseX = (e.clientX / w - 0.5) * 4;
+//   const mouseY = (e.clientY / h - 4) * 2;
+//   camera.position.x = -mouseX;
+//   camera.position.y = -mouseY;
+// });
