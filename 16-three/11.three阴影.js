@@ -7,6 +7,10 @@ import {
   MeshStandardMaterial,
 } from "three";
 
+// renderer.shadowMap.enabled = true;
+// plan.receiveShadow = true;
+// obj.castShadow = true;
+
 const w = 600 || window.innerWidth,
   h = 600 || window.innerHeight;
 
@@ -62,7 +66,7 @@ const controler = new OrbitControls(camera, renderer.domElement);
 const clock = new THREE.Clock();
 const tick = function () {
   const time = clock.getElapsedTime();
-  obj.position.y = Math.sin(time * 3) + 1.5;
+  obj.position.y = Math.abs(Math.sin(time * 2)) + 0.5;
   renderer.render(scene, camera);
   controler.update();
   lightHelper.update();
