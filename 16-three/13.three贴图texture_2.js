@@ -30,22 +30,39 @@ import img3 from "./images/3.webp";
 import img4 from "./images/4.webp";
 import img5 from "./images/5.webp";
 import img6 from "./images/6.webp";
+import small from "./images/small3.webp";
 const loader = new THREE.TextureLoader();
-const texture = loader.load(
-  "https://img1.baidu.com/it/u=1321275328,211149858&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=333"
-);
 const t1 = loader.load(img1);
 const t2 = loader.load(img2);
 const t3 = loader.load(img3);
 const t4 = loader.load(img4);
 const t5 = loader.load(img5);
 const t6 = loader.load(img6);
+const texture = loader.load(
+  "https://img1.baidu.com/it/u=1321275328,211149858&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=333"
+);
+const texture2 = loader.load(small);
+texture2.wrapS = THREE.RepeatWrapping;
+texture2.wrapT = THREE.RepeatWrapping;
+texture2.repeat.set(5, 5);
+// texture2.magFilter = THREE.NearestFilter;
+texture2.magFilter = THREE.LinearFilter;
+
+/* 
+关于贴图尺寸匹配: 
+概念: 贴图坐标系, uv/st/xy坐标
+magFilter 小图放大填满平面, nearest, linear
+minFilter 大图缩小填满平面, nearest, linear
+repeat 重复, repeat,mirrored_repeat, clamp_to_edge
+种类: 环境贴图,法线贴图,透明贴图....
+*/
 
 // 添加地面
 const planG = new THREE.PlaneGeometry(4, 4);
 const planM = new THREE.MeshStandardMaterial({
   // color: 0xcccccc,
-  map: texture,
+  // map: texture,
+  map: texture2,
   side: THREE.DoubleSide,
 });
 const plan = new THREE.Mesh(planG, planM);
