@@ -33,7 +33,7 @@ MeshStandardMaterial: 需要灯光, 通过调整属性可以达到MeshLambertMat
 其它更高级的材质: 详见api 
 */
 const m = new THREE.MeshPhongMaterial();
-m.color = new THREE.Color(0xff0000);
+m.color = new THREE.Color(0xffffff);
 // m.wireframe = true;
 const cube = new THREE.Mesh(g, m);
 scene.add(cube);
