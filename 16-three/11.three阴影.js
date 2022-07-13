@@ -9,6 +9,7 @@ import {
 
 // renderer.shadowMap.enabled = true;
 // plan.receiveShadow = true;
+// light.castShadow = true;
 // obj.castShadow = true;
 
 const w = 600 || window.innerWidth,

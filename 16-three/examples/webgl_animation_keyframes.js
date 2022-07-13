@@ -1,19 +1,19 @@
 import * as THREE from "three";
 
-import Stats from "./examples/jsm/libs/stats.module.js";
+import Stats from "./jsm/libs/stats.module.js";
 
-import { OrbitControls } from "./examples/jsm/controls/OrbitControls.js";
-import { RoomEnvironment } from "./examples/jsm/environments/RoomEnvironment.js";
+import { OrbitControls } from "./jsm/controls/OrbitControls.js";
+import { RoomEnvironment } from "./jsm/environments/RoomEnvironment.js";
 
-import { GLTFLoader } from "./examples/jsm/loaders/GLTFLoader.js";
-import { DRACOLoader } from "./examples/jsm/loaders/DRACOLoader.js";
+import { GLTFLoader } from "./jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "./jsm/loaders/DRACOLoader.js";
 
 let mixer;
 
-let w = 800, h = 800;
+let w = window.innerWidth, h = window.innerHeight;
 
 const clock = new THREE.Clock();
-const container = document.getElementById("app");
+const container = document.getElementById("container");
 
 const stats = new Stats();
 container.appendChild(stats.dom);
@@ -24,6 +24,8 @@ renderer.setSize(w, h);
 renderer.outputEncoding = THREE.sRGBEncoding;
 container.appendChild(renderer.domElement);
 
+// 将环境贴图添加到场景
+// 创建一个“预过滤的Mipmapped辐射环境贴图（PMREM）
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
 
 const scene = new THREE.Scene();
@@ -48,17 +50,19 @@ controls.enablePan = false;
 controls.enableDamping = true;
 
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("./examples/js/libs/draco/gltf/");
+dracoLoader.setDecoderPath("/examples/js/libs/draco/gltf/");
 
 const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 loader.load(
-  "./examples/models/gltf/LittlestTokyo.glb",
+  "/examples/models/gltf/LittlestTokyo.glb",
   function (gltf) {
     const model = gltf.scene;
     model.position.set(1, 1, 0);
     model.scale.set(0.01, 0.01, 0.01);
     scene.add(model);
+
+    console.log('gltf = ', gltf);
 
     mixer = new THREE.AnimationMixer(model);
     mixer.clipAction(gltf.animations[0]).play();
@@ -72,10 +76,10 @@ loader.load(
 );
 
 window.onresize = function () {
-  camera.aspect = w / h;
+  camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
-  renderer.setSize(w, h);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 };
 
 function animate() {
