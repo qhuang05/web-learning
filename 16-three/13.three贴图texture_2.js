@@ -45,7 +45,7 @@ const texture2 = loader.load(small);
 texture2.wrapS = THREE.RepeatWrapping;
 texture2.wrapT = THREE.RepeatWrapping;
 texture2.repeat.set(5, 5);
-// texture2.magFilter = THREE.NearestFilter;
+// texture2.minFilter = THREE.NearestFilter;
 texture2.magFilter = THREE.LinearFilter;
 
 /* 

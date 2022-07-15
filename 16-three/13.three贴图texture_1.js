@@ -34,6 +34,7 @@ const loader = new THREE.TextureLoader();
 const texture = loader.load(
   "https://img1.baidu.com/it/u=1321275328,211149858&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=333"
 );
+// const texture = new THREE.CanvasTexture(createImage());
 const t1 = loader.load(img1);
 const t2 = loader.load(img2);
 const t3 = loader.load(img3);
@@ -95,3 +96,23 @@ const tick = function () {
   controler.update();
 };
 tick();
+
+
+function createImage() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 256;
+  canvas.height = 256;
+
+  const context = canvas.getContext("2d");
+  context.fillStyle =
+    "rgb(" +
+    Math.floor(Math.random() * 256) +
+    "," +
+    Math.floor(Math.random() * 256) +
+    "," +
+    Math.floor(Math.random() * 256) +
+    ")";
+  context.fillRect(0, 0, 256, 256);
+
+  return canvas;
+}
