@@ -55,7 +55,26 @@ magFilter 小图放大填满平面, nearest, linear
 minFilter 大图缩小填满平面, nearest, linear
 repeat 重复, repeat,mirrored_repeat, clamp_to_edge
 种类: 环境贴图,法线贴图,透明贴图....
+
+贴图：
+material.map
+material.map.needsUpdate = true
+凹凸贴图：为材质增加厚度 
+material.bumpMap
+material.bumpScale
+法向贴图： 为材质创建更加细致和凹凸和皱纹
+material.normalMap
+material.normalScale.set(1,1)
+光照贴图：可以用来创建假阴影
+material.lightMap
+环境贴图：创建虚假的反光效果
+material.envMap
+高光贴图：
+material.specularMap
+通常会跟specular属性一起使用，该属性可以用来决定反光的颜色, shininess
 */
+
+// UV映射：两个维度U,V, 范围0-1
 
 // 添加地面
 const planG = new THREE.PlaneGeometry(4, 4);
