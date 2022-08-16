@@ -2,13 +2,13 @@
 <html>
 
 <head>
-  <script src="https://unpkg.com/konva@4.0.18/konva.min.js"></script>
+  <script src="./js/konva.js"></script>
+  <script src="./js/touch-emulator.js"></script>
   <script src="./js/hammer-konva.js"></script>
-  <!-- <script src="https://hammerjs.github.io/dist/hammer.js"></script> -->
   <meta name="viewport"
     content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
   <meta charset="utf-8" />
-  <title>Konva Mobile Touch Events Demo</title>
+  <title>konva移动端事件</title>
   <style>
     body {
       margin: 0;
@@ -24,7 +24,7 @@
   <script>
     function writeMessage(message) {
       const txt = text.text();
-      text.text(txt + message);
+      text.text(message);
       layer.draw();
     }
 
@@ -65,42 +65,59 @@
       strokeWidth: 4,
       draggable: true
     });
-
-    triangle.on('touchmove', function () {
-      var touchPos = stage.getPointerPosition();
-      var x = touchPos.x - 190;
-      var y = touchPos.y - 40;
-      writeMessage('x: ' + x + ', y: ' + y);
-    });
-
-    circle.on('touchstart', function () {
-      writeMessage('Touchstart circle');
-    });
-    circle.on('touchend', function () {
-      writeMessage('Touchend circle');
-    });
-
-    // circle.on('tap', function(){
-    //   writeMessage('tap circle');
-    // })
-
     layer.add(triangle);
     layer.add(circle);
     layer.add(text);
-
-    // add the layer to the stage
     stage.add(layer);
 
+    let curNode = null;
+    const selectNode = (node) => {
+      if (pinchFlag) return;
+      curNode = node;
+      layer.find('Transformer')?.destroy();
+      const tr = new Konva.Transformer();
+      tr.attachTo(node)
+      layer.add(tr)
+      layer.batchDraw()
+    }
 
-    var mc = new Hammer(stage);
-    mc.get('pinch').set({enable: true});
+    triangle.on('touchstart', function () {
+      selectNode(triangle)
+    })
+    circle.on('touchstart', function () {
+      selectNode(circle)
+    })
+
+    TouchEmulator();
+    Konva.hitOnDragEnabled = true;
+    Konva.captureTouchEventsEnabled = true;
+
+    var mc = new Hammer(stage, { domEvents: true });
+    mc.get('pinch').set({ enable: true });
+    // mc.get('rotate').set({ enable: true });
+
+    let startScaleX, startScaleY, pinchFlag = false;
     mc.on("pinchstart", function (ev) {
-      writeMessage(ev.type + " gesture detected 3");
+      if (!curNode) return;
+      pinchFlag = true;
+      // console.log(ev.type, ev)
+      circle.setAttrs({ 'draggable': false })
+      triangle.setAttrs({ 'draggable': false })
+      startScaleX = curNode.scaleX() || 1;
+      startScaleY = curNode.scaleY() || 1;
       layer.batchDraw();
     });
-    mc.on('tap',function(ev){
-      console.log('tap', ev)
-    })
+    mc.on("pinch", function (ev) {
+      if (!curNode) return;
+      circle.setAttrs({ 'draggable': true })
+      triangle.setAttrs({ 'draggable': true })
+      curNode.scaleX(startScaleX * ev.scale)
+      curNode.scaleY(startScaleY * ev.scale)
+      layer.batchDraw();
+    });
+    mc.on("pinchend", function (ev) {
+      pinchFlag = false;
+    });
   </script>
 </body>
 
