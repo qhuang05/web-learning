@@ -44,7 +44,7 @@
       fill: '#00D2FF',
       stroke: 'black',
       strokeWidth: 4,
-      draggable: true
+      draggable: false
     });
 
     var text = new Konva.Text({
@@ -63,7 +63,7 @@
       fill: 'red',
       stroke: 'black',
       strokeWidth: 4,
-      draggable: true
+      draggable: false
     });
     layer.add(triangle);
     layer.add(circle);
@@ -78,13 +78,26 @@
       const tr = new Konva.Transformer();
       tr.attachTo(node)
       layer.add(tr)
+      circle.setAttrs({ 'draggable': false })
+      triangle.setAttrs({ 'draggable': false })
+      curNode.setAttrs({ 'draggable': true })
       layer.batchDraw()
+
+      tr.on('dragstart', function (e) {
+        console.log('dragstart')
+      })
+      tr.on('dragmove', function (e) {
+        console.log('dragmove')
+      })
+      tr.on('dragend', function (e) {
+        console.log('dragend')
+      })
     }
 
-    triangle.on('touchstart', function () {
+    triangle.on('tap', function () {
       selectNode(triangle)
     })
-    circle.on('touchstart', function () {
+    circle.on('tap', function () {
       selectNode(circle)
     })
 
@@ -109,14 +122,13 @@
     });
     mc.on("pinch", function (ev) {
       if (!curNode) return;
-      circle.setAttrs({ 'draggable': true })
-      triangle.setAttrs({ 'draggable': true })
       curNode.scaleX(startScaleX * ev.scale)
       curNode.scaleY(startScaleY * ev.scale)
       layer.batchDraw();
     });
     mc.on("pinchend", function (ev) {
       pinchFlag = false;
+      curNode.setAttrs({ 'draggable': true })
     });
   </script>
 </body>
