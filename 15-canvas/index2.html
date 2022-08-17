@@ -44,7 +44,7 @@
       fill: '#00D2FF',
       stroke: 'black',
       strokeWidth: 4,
-      draggable: false
+      draggable: true
     });
 
     var text = new Konva.Text({
@@ -63,7 +63,7 @@
       fill: 'red',
       stroke: 'black',
       strokeWidth: 4,
-      draggable: false
+      draggable: true
     });
     layer.add(triangle);
     layer.add(circle);
@@ -78,9 +78,9 @@
       const tr = new Konva.Transformer();
       tr.attachTo(node)
       layer.add(tr)
-      circle.setAttrs({ 'draggable': false })
-      triangle.setAttrs({ 'draggable': false })
-      curNode.setAttrs({ 'draggable': true })
+      // circle.setAttrs({ 'draggable': false })
+      // triangle.setAttrs({ 'draggable': false })
+      // curNode.setAttrs({ 'draggable': true })
       layer.batchDraw()
 
       tr.on('dragstart', function (e) {
@@ -94,11 +94,17 @@
       })
     }
 
-    triangle.on('tap', function () {
+    triangle.on('touchstart', function () {
+      writeMessage('touchstart')
       selectNode(triangle)
+      // setTimeout(() => {
+      // }, 200)
     })
-    circle.on('tap', function () {
+    circle.on('touchstart', function () {
+      writeMessage('touchstart')
       selectNode(circle)
+      // setTimeout(() => {
+      // }, 200)
     })
 
     TouchEmulator();
@@ -111,6 +117,7 @@
 
     let startScaleX, startScaleY, pinchFlag = false;
     mc.on("pinchstart", function (ev) {
+      writeMessage('pinchstart')
       if (!curNode) return;
       pinchFlag = true;
       // console.log(ev.type, ev)
@@ -128,8 +135,27 @@
     });
     mc.on("pinchend", function (ev) {
       pinchFlag = false;
-      curNode.setAttrs({ 'draggable': true })
+      circle.setAttrs({ 'draggable': true })
+      triangle.setAttrs({ 'draggable': true })
     });
+    
+    let startX, startY, panFlag = false;
+    mc.on('panstart', function(ev){
+      // console.log('panstart', ev)
+      if(!curNode) return;
+      startX = curNode.x();
+      startY = curNode.y();
+    })
+    mc.on('panmove', function(ev){
+      // console.log('panmove', ev)
+      if(!curNode) return;
+      curNode.x(startX + ev.deltaX);
+      curNode.y(startY + ev.deltaY);
+    })
+    mc.on('panend', function(ev){
+      console.log('panend', ev)
+      if(!curNode) return;
+    })
   </script>
 </body>
 
