@@ -49,3 +49,16 @@ echo $length1
 
 length2=${#arr2[0]}
 echo $length2
+
+
+# 2-2. 关联数组
+declare -A site=(
+  ['google']="www.google.com"
+  ['baidu']="www.baidu.com"
+  ['hao123']="www.hao123.com"
+)
+echo "${site[@]}"           #www.google.com www.hao123.com www.baidu.com
+echo "${site['baidu']}"     #www.baidu.com
+echo "${site["baidu"]}"     #www.baidu.com
+echo "${!site[*]}"          #google hao123 baidu
+echo "${#site[*]}"          #3
