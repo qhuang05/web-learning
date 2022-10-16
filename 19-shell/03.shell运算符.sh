@@ -39,3 +39,16 @@ echo $val
 
 
 # 6. 文件测试运算符, 用于检测 Unix 文件的各种属性。
+# [ -b $file ]
+# [ -c $file ]
+# [ -d $file ]
+# [ -f $file ]
+# [ -g $file ]
+# [ -k $file ]
+# [ -p $file ]
+# [ -u $file ]
+# [ -r $file ]
+# [ -w $file ]
+# [ -x $file ]
+# [ -s $file ]
+# [ -e $file ]
