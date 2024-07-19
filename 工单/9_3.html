@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生产工单A4(9*3)</title>
+  <style>
+    html, body{
+      margin:0; 
+      padding:0;
+      font:400 9px/1 'PingFang SC','Microsoft Yahei',sans-serif;
+    }
+    .page{
+      width: 820px;
+      height: 1160px;
+      margin: 0 auto;
+    }
+    .wrapper, table, tr, td, th, tbody, thead, tfoot {
+      page-break-inside: avoid !important;
+    }
+    .wrapper{
+      width: 760px;
+      height: 1056px;
+      margin: 0 auto;
+    }
+    .extra-table{
+      width: 760px;
+      height: 50px;
+      line-height: 50px;
+      margin: 0 auto;
+      border-spacing:0;
+      font-size:15px;
+    }
+    .extra-1{
+      width: 40%;
+      text-align: left;
+    }
+    .extra-2{
+      width: 20%;
+      text-align: center;
+    }
+    .extra-3{
+      width: 40%;
+      text-align: right;
+    }
+    .content-table{
+      width:100%;
+      border-collapse:collapse;
+      border-spacing:0;
+      margin: 0 auto;
+      font-size: 8px;
+    }
+    .content-table td{
+      width: 33.33%;
+      height: 114.2px;
+      border: 1px solid #000;
+      vertical-align:middle;
+      overflow: hidden;
+    }
+    .content-item{
+      margin: 0 7px;
+    }
+    .left{
+      float: left;
+      position: relative;
+    }
+    .left img{
+      width: 107px;
+      height: 107px;
+    }
+    .left .tag{
+      display:inline-block;
+      line-height:15px;
+      padding:0 3px;
+      background-color:rgb(245,63,63);
+      color:#fff;
+      position:absolute;
+      top:0;
+      left:0;
+    }
+    .left .tag.urgent{
+      top: initial;
+      bottom: 1px;
+      left: 0;
+      padding: 5px;
+      line-height: 1;
+    }
+    .right{
+      float: left;
+      width: 115px;
+      padding-left:4px;
+    }
+    .line-1{
+      position: relative;
+      font-size: 11px;
+    }
+    .line-1 .type{
+      display:inline-block;
+      background:#000;
+      border-radius:50%;
+      vertical-align:2px;
+      width:6px;
+      height:6px;
+    }
+    .line-1 .platform{
+      font-weight:bold;
+      position:absolute;
+      right:0;
+      top:0;
+    }
+    .line-2{
+      font-weight:bold;
+      font-size:12px;
+      line-height:13px;
+    }
+    .line-3{
+      clear:both;
+    }
+    .qr-code{
+      float: left;
+      width: 48px;
+      height: 48px;
+    }
+    .qr-code img{
+      width: 100%;
+      height: 100%;
+      mix-blend-mode: color-dodge;
+    }
+    .cz-info{
+      float:left;
+      width: 63px;
+      margin-left:4px;
+      font-size:8px;
+      line-height:9px;
+    }
+    .cz-info>div{
+      width:100%;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .line-4{
+      width:100%;
+      display:table;
+      white-space:nowrap;
+      line-height:9px;
+    }
+    .line-4-left{
+      display: table-cell;
+    }
+    .line-4-right{
+      display: table-cell;
+      text-align: right;
+    }
+    .time{
+      display:inline-block;
+      font-size:8px;
+      padding:0 2px;
+      background-color:rgb(102,102,102);
+      color:#fff;
+    }
+    .time.week1{
+      background-color: rgb(170,33,22);
+    }
+    .time.week2{
+      background-color: rgb(245,130,32);
+    }
+    .time.week3{
+      background-color: rgb(119,120,123);
+    }
+    .time.week4{
+      background-color: rgb(0,88,49);
+    }
+    .time.week5{
+      background-color: rgb(34,75,143);
+    }
+    .time.week6{
+      background-color: rgb(139,0,139);
+    }
+    .time.week7{
+      background-color: rgb(35,24,21);
+    }
+    .time.week1.even{
+      background-color: rgb(132,57,0);
+    }
+    .time.week2.even{
+      background-color: rgb(252,175,23);
+    }
+    .time.week3.even{
+      background-color: rgb(161,163,166);
+    }
+    .time.week4.even{
+      background-color: rgb(29,149,63);
+    }
+    .time.week5.even{
+      background-color: rgb(16,43,106);
+    }
+    .time.week6.even{
+      background-color: rgb(65,20,69);
+    }
+    .time.week7.even{
+      background-color: rgb(62,65,69);
+    }
+    .total{
+      font-size: 9px;
+      text-align: right;
+    }
+    .line-interval{
+      margin-top: 2px;
+    }
+    .red{
+      color:rgb(245,63,63);
+    }
+    .left-text {
+      text-align: left;
+    }
+  </style>
+</head>
+<body><div class="page">
+    <table class="extra-table">
+      <tbody>
+        <tr>
+          <td class="extra-1">接单工厂1</td>
+          <td class="extra-2">第1页/共1页</td>
+          <td class="extra-3">件数：1(共1)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="wrapper">
+      <table class="content-table">
+        <tbody><tr><td>
+            <div class="content-item">
+              <div class="left">
+                <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441938988912119296/441236628405521920_1.jpeg" />
+                <div class="tag"></div>
+<div class="tag urgent">急</div>
+              </div>
+              <div class="right">
+                <div class="line-1">
+                  <span>20H</span>
+                  <span class="type"></span>
+                  <span>06031</span>
+                  <span class="platform">JIT</span>
+                </div>
+                <div class="line-2 line-interval">BVBO29N-1</div>
+                <div class="line-3 line-interval">
+                  <div class="qr-code">
+                    <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441938988912119296/441236628405521920_1_qrCode.jpg" />
+                  </div>
+                  <div class="cz-info">
+                    <div>1380B-</div>
+                    <div>黑色</div>
+                    <div>0-3M</div>
+                    <div>第1项-项1件</div>
+                    <div class="total">总:2件</div>
+                  </div>
+                </div>
+                <div class="line-4">
+                  <div class="line-4-left">
+                    <div>PONX1***dTest</div>
+                    <div class="line-interval">
+                      <span class="time week5 ">07-19 15:22</span>
+                    </div>
+                    <div class="line-interval">743524981457</div>
+                  </div>
+                  <div class="line-4-right">
+                    <div class="line-interval">
+                      <span class="time week6 ">07-20 18:58</span>
+                    </div>
+                    <div class="line-interval">
+                      <span class="time week6 ">07-20 18:58</span>
+                    </div>
+                    <div class="line-interval left-text">A03</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           </td>
+<td></td><td></td></tr></tbody>
+      </table>
+    </div>
+    <table class="extra-table">
+      <tbody>
+        <tr>
+          <td class="extra-1">导出人:接单工厂1</td>
+          <td class="extra-2">第1页/共1页</td>
+          <td class="extra-3">2024-07-19 18:13:53</td>
+        </tr>
+      </tbody>
+    </table>
+  </div></body></html>

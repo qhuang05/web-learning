@@ -54,6 +54,13 @@
       top:0;
       left:0;
     }
+    .left .tag.urgent{
+      top: initial;
+      bottom: 1px;
+      left: 0;
+      padding: 5px;
+      line-height: 1;
+    }
     .right{
       float: left;
       width: 145px;
@@ -87,14 +94,29 @@
     }
     .qr-code{
       float: left;
+      width: 62px;
+      height: 62px;
+    }
+    .qr-code.color1{
+      background: rgb(71,45,86);
+    }
+    .qr-code.color2{
+      background: rgb(135,72,31);
+    }
+    .qr-code.color3{
+      background: rgb(16,43,106);
+    }
+    .qr-code.color4{
+      background: rgb(35,24,21);
     }
     .qr-code img{
-      width: 50px;
-      height: 50px;
+      width: 100%;
+      height: 100%;
+      mix-blend-mode: color-dodge;
     }
     .cz-info{
       float:left;
-      width: 90px;
+      width: 78px;
       margin-left:5px;
       font-size:11px;
       line-height:12px;
@@ -124,8 +146,51 @@
       background-color:rgb(102,102,102);
       color:#fff;
     }
+    .time.week1{
+      background-color: rgb(170,33,22);
+    }
+    .time.week2{
+      background-color: rgb(245,130,32);
+    }
+    .time.week3{
+      background-color: rgb(119,120,123);
+    }
+    .time.week4{
+      background-color: rgb(0,88,49);
+    }
+    .time.week5{
+      background-color: rgb(34,75,143);
+    }
+    .time.week6{
+      background-color: rgb(139,0,139);
+    }
+    .time.week7{
+      background-color: rgb(35,24,21);
+    }
+    .time.week1.even{
+      background-color: rgb(132,57,0);
+    }
+    .time.week2.even{
+      background-color: rgb(252,175,23);
+    }
+    .time.week3.even{
+      background-color: rgb(161,163,166);
+    }
+    .time.week4.even{
+      background-color: rgb(29,149,63);
+    }
+    .time.week5.even{
+      background-color: rgb(16,43,106);
+    }
+    .time.week6.even{
+      background-color: rgb(65,20,69);
+    }
+    .time.week7.even{
+      background-color: rgb(62,65,69);
+    }
     .total{
       font-size: 12px;
+      text-align: right;
     }
     .line-interval{
       margin-top: 1px;
@@ -141,50 +206,52 @@
         <tbody><tr><td>
               <div class="content-item">
                 <div class="left">
-                  <img src="/Users/weixianfeng/Downloads/production-scheduler/2024/07/15/p_work_order/438822828096100480/436840564600608897_1.jpeg" />
+                  <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441940708056665600/441236628405521920_1.jpeg" />
                   <div class="tag"></div>
+                  <div class="tag urgent">急</div>
                 </div>
                 <div class="right">
                   <div class="line-1">
-                    <span>48H</span>
+                    <span>20H</span>
                     <span class="type"></span>
-                    <span>10101</span>
-                    <span class="platform">其他</span>
+                    <span>06031</span>
+                    <span class="platform">JIT</span>
                   </div>
-                  <div class="line-2 line-interval">BJQEORQ-1</div>
+                  <div class="line-2 line-interval">BVBO29N-1</div>
                   <div class="line-3 line-interval">
                     <div class="qr-code">
-                      <img src="/Users/weixianfeng/Downloads/production-scheduler/2024/07/15/p_work_order/438822828096100480/436840564600608897_1_qrCode.jpg" />
+                      <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441940708056665600/441236628405521920_1_qrCode.jpg" />
                     </div>
                     <div class="cz-info">
-                      <div>XB0001</div>
+                      <div>1380B-</div>
                       <div>黑色</div>
-                      <div>单码</div>
+                      <div>0-3M</div>
                       <div>第1项-项1件</div>
+                      <div class="total">总:2件</div>
                     </div>
                   </div>
                   <div class="line-4">
-                    <div class="line-4-left">
-                      <div></div>
-                      <div>F4352***41888</div>
-                      <div class="line-interval">
-                        <span class="time">07-15 11:02</span>
-                      </div>
-                      <div class="line-interval"></div>
+                  <div class="line-4-left">
+                    <div>PONX1***dTest</div>
+                    <div class="line-interval">
+                      <span class="time week5 ">07-19 15:22</span>
                     </div>
-                    <div class="line-4-right">
-                      <div class="total">总:1件</div>
-                      <divclass="line-interval" class="line-interval">
-                        <span class="time">07-14 17:24</span>
-                      </divclass="line-interval">
-                      <div class="line-interval">
-                        <span class="time">07-14 17:24</span>
-                      </div>
+                    <div class="line-interval">743524981457</div>
+                  </div>
+                  <div class="line-4-right">
+                    <div class="line-interval">
+                      <span class="time week6 ">07-20 18:58</span>
                     </div>
+                    <div class="line-interval">
+                      <span class="time week6 ">07-20 18:58</span>
+                    </div>
+                    <div class="line-interval left-text">A03</div>
                   </div>
                 </div>
               </div>
-            </td></tr></tbody>
+            </div>
+           </td>
+</tr></tbody>
       </table>
     </div>
   </div></body>
