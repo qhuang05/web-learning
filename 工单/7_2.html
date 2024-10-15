@@ -9,7 +9,7 @@
     html, body{
       margin:0; 
       padding:0;
-      font:400 10px/1 'PingFang SC','Microsoft Yahei',sans-serif;
+      font:400 11px/1 'PingFang SC','Microsoft Yahei',sans-serif;
     }
     .page{
       width: 820px;
@@ -58,20 +58,22 @@
       overflow: hidden;
     }
     .content-item{
-      margin: 0 34px;
+      margin: 0 42px;
     }
     .left{
       float: left;
       position: relative;
+      width: 138px;
+      height: 138px;
     }
     .left img{
-      width: 139px;
-      height: 139px;
+      width: 100%;
+      height: 100%;
     }
     .left .tag{
       display:inline-block;
       line-height:15px;
-      padding:0 3px;
+      padding:0 4px;
       background-color:rgb(245,63,63);
       color:#fff;
       position:absolute;
@@ -80,10 +82,15 @@
     }
     .left .tag.urgent{
       top: initial;
-      bottom: 1px;
+      bottom: 0;
       left: 0;
-      padding: 5px;
-      line-height: 1;
+      padding: 0 4px;
+    }
+    .left .tag.gray{
+      top: 20px;
+      bottom: initial;
+      left: 0;
+      padding: 0 4px;
     }
     .right{
       float: left;
@@ -112,14 +119,16 @@
       font-weight:bold;
       font-size:15px;
       line-height:16px;
+      margin-top: 2px;
     }
     .line-3{
       clear:both;
+      margin-top: 2px;
     }
     .qr-code{
       float: left;
-      width: 62px;
-      height: 62px;
+      width: 61px;
+      height: 61px;
     }
     .qr-code.color1{
       background: rgb(71,45,86);
@@ -149,6 +158,15 @@
       width:100%;
       white-space: nowrap;
       overflow: hidden;
+      margin-top: 0.5px;
+    }
+    .cz-info>div:first-child{
+      margin-top: 0;
+    }
+    .total{
+      font-size: 12px;
+      text-align: right;
+      margin-top:2px;
     }
     .line-4{
       width:100%;
@@ -162,6 +180,9 @@
     .line-4-right{
       display: table-cell;
       text-align: right;
+    }
+    .line-4-right>div{
+      display: inline-table;
     }
     .time{
       display:inline-block;
@@ -212,15 +233,14 @@
     .time.week7.even{
       background-color: rgb(62,65,69);
     }
-    .total{
-      font-size: 12px;
-      text-align: right;
-    }
     .line-interval{
       margin-top: 2px;
     }
     .red{
       color:rgb(245,63,63);
+    }
+    .left-text{
+      text-align: left;
     }
   </style>
 </head>
@@ -241,7 +261,8 @@
                 <div class="left">
                   <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441940486387699200/441236628405521920_1.jpeg" />
                   <div class="tag"></div>
-<div class="tag urgent">急</div>
+                  <div class="tag urgent">急</div>
+                  <div class="tag gray">灰</div>
                 </div>
                 <div class="right">
                   <div class="line-1">
@@ -250,8 +271,8 @@
                     <span>06031</span>
                     <span class="platform">JIT</span>
                   </div>
-                  <div class="line-2 line-interval">BVBO29N-1</div>
-                  <div class="line-3 line-interval">
+                  <div class="line-2">BVBO29N-1</div>
+                  <div class="line-3">
                     <div class="qr-code">
                       <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441940486387699200/441236628405521920_1_qrCode.jpg" />
                     </div>
@@ -272,13 +293,15 @@
                     <div class="line-interval">743524981457</div>
                   </div>
                   <div class="line-4-right">
-                    <div class="line-interval">
-                      <span class="time week6 ">07-20 18:58</span>
+                    <div>
+                      <div class="line-interval">
+                        <span class="time week6 ">07-20 18:58</span>
+                      </div>
+                      <div class="line-interval">
+                        <span class="time week6 ">07-20 18:58</span>
+                      </div>
+                      <div class="line-interval left-text">A03</div>
                     </div>
-                    <div class="line-interval">
-                      <span class="time week6 ">07-20 18:58</span>
-                    </div>
-                    <div class="line-interval left-text">A03</div>
                   </div>
                 </div>
               </div>

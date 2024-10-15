@@ -9,7 +9,7 @@
     html, body{
       margin:0; 
       padding:0;
-      font:400 9px/1 'PingFang SC','Microsoft Yahei',sans-serif;
+      font:400 8px/1 'PingFang SC','Microsoft Yahei',sans-serif;
     }
     .page{
       width: 820px;
@@ -59,19 +59,21 @@
       overflow: hidden;
     }
     .content-item{
-      margin: 0 7px;
+      margin: 0 12px;
     }
     .left{
       float: left;
       position: relative;
-    }
-    .left img{
       width: 107px;
       height: 107px;
     }
+    .left img{
+      width: 100%;
+      height: 100%;
+    }
     .left .tag{
       display:inline-block;
-      line-height:15px;
+      line-height:11px;
       padding:0 3px;
       background-color:rgb(245,63,63);
       color:#fff;
@@ -81,10 +83,15 @@
     }
     .left .tag.urgent{
       top: initial;
-      bottom: 1px;
+      bottom: 0;
       left: 0;
-      padding: 5px;
-      line-height: 1;
+      padding: 0 3px;
+    }
+    .left .tag.gray{
+      top: 17px;
+      bottom: initial;
+      left: 0;
+      padding: 0 3px;
     }
     .right{
       float: left;
@@ -111,16 +118,18 @@
     }
     .line-2{
       font-weight:bold;
-      font-size:12px;
-      line-height:13px;
+      font-size:11px;
+      line-height:12px;
+      margin-top: 2px;
     }
     .line-3{
       clear:both;
+      margin-top: 2px;
     }
     .qr-code{
       float: left;
-      width: 48px;
-      height: 48px;
+      width: 47px;
+      height: 47px;
     }
     .qr-code img{
       width: 100%;
@@ -138,6 +147,14 @@
       width:100%;
       white-space: nowrap;
       overflow: hidden;
+      margin-top: 0.5px;
+    }
+    .cz-info>div:first-child{
+      margin-top: 0;
+    }
+    .total{
+      font-size: 9px;
+      text-align: right;
     }
     .line-4{
       width:100%;
@@ -151,6 +168,9 @@
     .line-4-right{
       display: table-cell;
       text-align: right;
+    }
+    .line-4-right>div{
+      display: inline-table;
     }
     .time{
       display:inline-block;
@@ -201,10 +221,6 @@
     .time.week7.even{
       background-color: rgb(62,65,69);
     }
-    .total{
-      font-size: 9px;
-      text-align: right;
-    }
     .line-interval{
       margin-top: 2px;
     }
@@ -233,7 +249,8 @@
               <div class="left">
                 <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441938988912119296/441236628405521920_1.jpeg" />
                 <div class="tag"></div>
-<div class="tag urgent">急</div>
+                <div class="tag urgent">急</div>
+                <div class="tag gray">灰</div>
               </div>
               <div class="right">
                 <div class="line-1">
@@ -242,8 +259,8 @@
                   <span>06031</span>
                   <span class="platform">JIT</span>
                 </div>
-                <div class="line-2 line-interval">BVBO29N-1</div>
-                <div class="line-3 line-interval">
+                <div class="line-2">BVBO29N-1</div>
+                <div class="line-3">
                   <div class="qr-code">
                     <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441938988912119296/441236628405521920_1_qrCode.jpg" />
                   </div>
@@ -264,13 +281,15 @@
                     <div class="line-interval">743524981457</div>
                   </div>
                   <div class="line-4-right">
-                    <div class="line-interval">
-                      <span class="time week6 ">07-20 18:58</span>
+                    <div>
+                      <div class="line-interval">
+                        <span class="time week6 ">07-20 18:58</span>
+                      </div>
+                      <div class="line-interval">
+                        <span class="time week6 ">07-20 18:58</span>
+                      </div>
+                      <div class="line-interval left-text">A03</div>
                     </div>
-                    <div class="line-interval">
-                      <span class="time week6 ">07-20 18:58</span>
-                    </div>
-                    <div class="line-interval left-text">A03</div>
                   </div>
                 </div>
               </div>
