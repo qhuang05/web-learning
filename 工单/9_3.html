@@ -121,6 +121,14 @@
       font-size:11px;
       line-height:12px;
       margin-top: 2px;
+      position: relative;
+    }
+    .line-2 .code{
+      position:absolute;
+      right:0;
+      top:0;
+      font-weight: normal;
+      font-size: 8px;
     }
     .line-3{
       clear:both;
@@ -158,19 +166,24 @@
     }
     .line-4{
       width:100%;
-      display:table;
       white-space:nowrap;
       line-height:9px;
     }
     .line-4-left{
-      display: table-cell;
+      width: 50%;
+      float: left;
     }
     .line-4-right{
-      display: table-cell;
+      width: 50%;
+      float: right;
       text-align: right;
     }
     .line-4-right>div{
       display: inline-table;
+    }
+    .line-4 .order-id, 
+    .line-4 .ship-id{
+      font-size: 10px;
     }
     .time{
       display:inline-block;
@@ -230,6 +243,9 @@
     .left-text {
       text-align: left;
     }
+    .right-text{
+      text-align: right;
+    }
   </style>
 </head>
 <body><div class="page">
@@ -259,7 +275,10 @@
                   <span>06031</span>
                   <span class="platform">JIT</span>
                 </div>
-                <div class="line-2">BVBO29N-1</div>
+                <div class="line-2">
+                  <span>BVBO29N-1</span>
+                  <span class="code">A03</span>
+                </div>
                 <div class="line-3">
                   <div class="qr-code">
                     <img src="/data/docker/production-scheduler/2024/07/19/p_work_order/441938988912119296/441236628405521920_1_qrCode.jpg" />
@@ -274,21 +293,22 @@
                 </div>
                 <div class="line-4">
                   <div class="line-4-left">
-                    <div>PONX1***dTest</div>
+                    <div class="order-id">***12345</div>
                     <div class="line-interval">
                       <span class="time week5 ">07-19 15:22</span>
                     </div>
-                    <div class="line-interval">743524981457</div>
+                    <div class="line-interval">
+                      <span class="time week6 ">07-20 18:58</span>
+                    </div>
+                    
                   </div>
                   <div class="line-4-right">
                     <div>
+                      <div class="ship-id right-text">***56789</div>
                       <div class="line-interval">
                         <span class="time week6 ">07-20 18:58</span>
                       </div>
-                      <div class="line-interval">
-                        <span class="time week6 ">07-20 18:58</span>
-                      </div>
-                      <div class="line-interval left-text">A03</div>
+                      <div class="line-interval left-text">X002L4CP6B</div>
                     </div>
                   </div>
                 </div>
