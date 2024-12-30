@@ -31,7 +31,7 @@ str1='hello world'
 echo ${#str1}
 echo ${str1:0:5}
 echo `expr index "${str1}" dw`
-echo "---------------------"
+echo "----------------------"
 
 
 # 2. 数组,shell只支持一维数组

@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <title>装箱清单A4</title>
 </head>
-<!-- 
-    1pt == 4/3px
-    1mm == 3.78px
-    A4纸：210mm*297mm
-    PDF: 10*10cm
-    备注：display:flex无效; 样式需要都放在style里面, <table width="450"></table>这种写法无效
+<!-- A4纸的尺寸 = 210x297mm
+如果屏幕DPI分辨率为72像素/英寸，换算一下：相当于1cm可呈现 (72px/2.54cm) =28.34px。
+常用分辨率下A4纸在屏幕上的像素尺寸:
+分辨率是72像素英寸时，A4纸的尺寸的图像的像素是595x842;
+分辨率是96像素/英寸时，A4纸的尺寸的图像的像素是794x1123; (默认)
+分辨率是120像素/英寸时, A4纸的尺寸的图像的像素是1487x2105;
+分辨率是150像素/英寸时，A4纸的尺寸的图像的像素是1240x1754;
+分辨率是300像素/英寸时, A4纸的尺寸的图像的像素是2480x3508。 -->
+
+<!--
+A4纸：210mm*297mm (按默认DPI=96像素/英寸计算时，1mm == 3.78px)
+PDF: 10*10cm
+备注：display:flex无效; 样式需要都放在style里面, <table width="450"></table>这种写法无效 
 -->
+
 <body>
     <table style="width:100%;font:400 14px/1 MicrosoftYaHei;color:rgba(51,51,51,1);border-collapse:collapse;border:1px solid rgba(51,51,51,1);">
         <tr>
