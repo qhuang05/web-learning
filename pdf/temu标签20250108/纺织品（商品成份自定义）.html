@@ -13,7 +13,7 @@
         margin: initial;
         height: -webkit-fill-available;
       }
-      .__temp__page .relative{
+      .__temp__page .relative {
         position: relative;
       }
       .__temp__page .fl {
@@ -78,7 +78,7 @@
         bottom: 0;
       }
       .__temp__page .warning-info {
-        height: 200px;
+        height: 189px;
         padding-left: 8px;
         border-bottom: 1px solid #464545;
       }
@@ -90,7 +90,7 @@
       }
       .__temp__page .image-1 {
         background: #fff;
-        margin-top:5px;
+        margin-top: 5px;
       }
       .__temp__page .image-2 {
         margin-top: 5px;
@@ -183,28 +183,49 @@
       }
       .__temp__page .service-info {
         width: 100%;
-        height: 33px;
+        height: 44px;
         overflow: hidden;
         border-bottom: 1px solid #464545;
       }
-      .__temp__page .service-cont{
-        display: table;
+      .__temp__page .service-cont {
         width: 100%;
       }
       .__temp__page .service-cont img {
-        margin-top: 6px;
+        margin-top: 12px;
         margin-left: 8px;
         background: #fff;
+        width: 63px;
+        float: left;
       }
-      .__temp__page .service-cont div {
-        width: 400px;
-        display: table-cell;
-        padding-left: 5px;
+      .__temp__page .service-cont > div {
+        padding-left: 76px;
         padding-right: 8px;
         text-align: left;
         font-size: 9px;
         line-height: 11px;
         vertical-align: middle;
+      }
+      .__temp__page .service-cont > div [data-tt='false'] {
+        white-space: inherit;
+        text-overflow: inherit;
+        height: auto;
+      }
+      .__temp__page .service-cont > div [style*='display: none'] + .pp {
+        white-space: inherit;
+        text-overflow: inherit;
+        height: auto;
+      }
+      .text-over {
+        white-space: nowrap;
+        text-overflow: clip;
+        height: 10px;
+        width: 100%;
+        word-break: break-word;
+      }
+      .text-over-t {
+        text-overflow: clip;
+        width: 100%;
+        word-break: break-word;
       }
       .__temp__page [data-show='false'],
       .__temp__page [data-show='falsefalse'],
@@ -294,11 +315,34 @@
                 style="width: 63px; height: 20px"
               />
               <div>
-                <span
-                  class="txt-repaire txt-repaire5"
-                  varkey="shop.label.eu_rep"
-                  >${shop.label.eu_rep}</span
+                <div
+                  class="txt-repaire txt-repaire5 text-over"
+                  pvarkey="shop.label.eu_rep_name"
+                  data-show="${shop.label.eu_erp.name.show}"
                 >
+                  Name:
+                  <span varkey="shop.label.eu_rep_name"
+                    >${shop.label.eu_rep_name}</span
+                  >
+                </div>
+                <div
+                  class="txt-repaire txt-repaire5 text-over-t pp"
+                  pvarkey="shop.label.eu_rep"
+                  data-tt="${shop.label.uk_erp.name.show}"
+                >
+                  Address:
+                  <span varkey="shop.label.eu_rep">${shop.label.eu_rep}</span>
+                </div>
+                <div
+                  class="txt-repaire txt-repaire5 text-over"
+                  pvarkey="shop.label.eu_rep_email"
+                  data-show="${shop.label.eu_erp.name.show}"
+                >
+                  Email:
+                  <span varkey="shop.label.eu_rep_email"
+                    >${shop.label.eu_rep_email}</span
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -313,11 +357,34 @@
                 style="width: 63px; height: 20px"
               />
               <div>
-                <span
-                  class="txt-repaire txt-repaire5"
-                  varkey="shop.label.uk_rep"
-                  >${shop.label.uk_rep}</span
+                <div
+                  class="txt-repaire txt-repaire5 text-over"
+                  pvarkey="shop.label.uk_rep_name"
+                  data-show="${shop.label.uk_erp.name.show}"
                 >
+                  Name:
+                  <span varkey="shop.label.uk_rep_name"
+                    >${shop.label.uk_rep_name}</span
+                  >
+                </div>
+                <div
+                  class="txt-repaire txt-repaire5 text-over-t pp"
+                  pvarkey="shop.label.uk_rep"
+                  data-tt="${shop.label.uk_erp.name.show}"
+                >
+                  Address:
+                  <span varkey="shop.label.uk_rep">${shop.label.uk_rep}</span>
+                </div>
+                <div
+                  class="txt-repaire txt-repaire5 text-over"
+                  pvarkey="shop.label.uk_rep_email"
+                  data-show="${shop.label.uk_erp.name.show}"
+                >
+                  Email:
+                  <span varkey="shop.label.uk_rep_email"
+                    >${shop.label.uk_rep_email}</span
+                  >
+                </div>
               </div>
             </div>
           </div>
@@ -332,7 +399,7 @@
             <div class="relative">
               <img
                 src="https://obs-hm102.hihumbird.com/attach/temu_label/flag1.svg"
-                style="width: 238px;height:69px"
+                style="width: 238px; height: 64px"
                 class="image-1"
               />
               <div
@@ -354,7 +421,7 @@
             <div>
               <img
                 src="https://obs-hm102.hihumbird.com/attach/temu_label/flag2.svg"
-                style="width: 183px; height: 74px"
+                style="width: 183px; height: 69px"
                 class="image-2"
               />
               <div class="tbox fr">
